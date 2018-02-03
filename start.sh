@@ -13,11 +13,11 @@ MOUNT_FOLDER=""
 # mkdir -p "$MOUNT_DEST"
 # echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
 # mount "$MOUNT_SOURCE" "$MOUNT_DEST"
-if [ $? -eq 0 ]; then
-    echo "Mounted successfully."
-else
-    echo "Mounting failed!"
-fi
+# if [ $? -eq 0 ]; then
+#     echo "Mounted successfully."
+# else
+#     echo "Mounting failed!"
+# fi
 df -h
 
 # Setup Samba File Sharing
@@ -29,6 +29,7 @@ echo "Samba user name: $SMBUSER"
 echo "Samba user password: $SMBPASS"
 echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
 /etc/init.d/samba start
+mkdir -p /mnt/torrents
 chmod 777 /mnt/torrents
 
 #===== CUSTOMIZE =====

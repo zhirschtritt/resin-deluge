@@ -1,17 +1,18 @@
 #!/bin/bash
 set -e
 
+echo "Starting start.sh..."
 echo "Initializing"
 
 #===== CUSTOMIZE =====
 # Mount network shared drive
 MOUNT_FOLDER=""
 MOUNT_HOST="/dev/sda1"
-MOUNT_SOURCE="//$MOUNT_HOST/$MOUNT_FOLDER"
+MOUNT_SOURCE="/$MOUNT_HOST/$MOUNT_FOLDER"
 MOUNT_DEST="/data/mount"
 mkdir -p "$MOUNT_DEST"
 echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
-mount "$MOUNT_SOURCE" "$MOUNT_DEST"
+# mount "$MOUNT_SOURCE" "$MOUNT_DEST"
 if [ $? -eq 0 ]; then
     echo "Mounted successfully."
 else
@@ -19,6 +20,7 @@ else
 fi
 df -h
 #===== CUSTOMIZE =====
+echo "Setting up Deluge"
 
 # Configure transmission
 : ${DOWNLOADS_DIR:="/data/Downloads"}
@@ -56,3 +58,4 @@ SMBPASS=${SMBPASS:-1234}
 echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
 /etc/init.d/samba start
 chmod 777 /data
+npm start

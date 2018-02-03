@@ -11,12 +11,13 @@ MOUNT_SOURCE="//$MOUNT_HOST/$MOUNT_FOLDER"
 MOUNT_DEST="/data/mount"
 mkdir -p "$MOUNT_DEST"
 echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
-mount -t cifs -o username=root,password=,guest,uid=1000,gid=1000,rw,file_mode=0777,dir_mode=0777,sfu "$MOUNT_SOURCE" "$MOUNT_DEST"
+mount "$MOUNT_SOURCE" "$MOUNT_DEST"
 if [ $? -eq 0 ]; then
     echo "Mounted successfully."
 else
     echo "Mounting failed!"
 fi
+df -h
 #===== CUSTOMIZE =====
 
 # Configure transmission

@@ -1,0 +1,11 @@
+[Unit]
+Description = External 1TB HD
+
+[Mount]
+What = LABEL=externalHD
+Where = /data/mount
+Type = ext4
+Options = rw,relatime,data=ordered
+
+[Install]
+WantedBy = multi-user.target

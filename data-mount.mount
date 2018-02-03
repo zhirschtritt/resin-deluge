@@ -3,7 +3,7 @@ Description = External 1TB HD
 
 [Mount]
 What = LABEL=ext41tb
-Where = /data/mount
+Where = /mnt/torrents
 Type = ext4
 Options = rw,relatime,data=ordered
 

@@ -7,11 +7,11 @@ echo "Initializing"
 #===== CUSTOMIZE =====
 # Mount network shared drive
 MOUNT_FOLDER=""
-MOUNT_HOST="/dev/sda1"
-MOUNT_SOURCE="/$MOUNT_HOST/$MOUNT_FOLDER"
-MOUNT_DEST="/data/mount"
-mkdir -p "$MOUNT_DEST"
-echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
+# MOUNT_HOST="/dev/sda1"
+# MOUNT_SOURCE="/$MOUNT_HOST/$MOUNT_FOLDER"
+# MOUNT_DEST="/data/mount"
+# mkdir -p "$MOUNT_DEST"
+# echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
 # mount "$MOUNT_SOURCE" "$MOUNT_DEST"
 if [ $? -eq 0 ]; then
     echo "Mounted successfully."
@@ -29,20 +29,30 @@ echo "Samba user name: $SMBUSER"
 echo "Samba user password: $SMBPASS"
 echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
 /etc/init.d/samba start
-chmod 777 /data
+chmod 777 /mnt/torrents
 
 #===== CUSTOMIZE =====
 echo "Setting up Deluge"
 
 # Configure transmission
-: ${DOWNLOADS_DIR:="/data/Downloads"}
-: ${DELUGE_CONFIG_DIR:="/data/deluge"}
+: ${TORRENTS_DIR:="/mnt/torrents"}
+: ${DOWNLOADING_DIR:="/mnt/torrents/downloading"}
+: ${COMPLETED_DIR:="/mnt/torrents/completed"}
+: ${WATCH_DIR:="/mnt/torrents/watch"}
+: ${BACKUP_DIR:="/mnt/torrents/backup"}
+
+: ${DELUGE_CONFIG_DIR:="/mnt/deluge/deluge_config"}
 : ${DELUGE_LOGLEVEL:="info"}
+: ${DELUGE_PLUGINS_DIR:="/mnt/deluge/plugins"}
 DELUGE_SETTINGS_PATH="$DELUGE_CONFIG_DIR/core.conf"
 DELUGE_LOGS_PATH="$DELUGE_CONFIG_DIR/deluged.log"
 
 # Setup Deluge
-mkdir -p "$DOWNLOADS_DIR"
+mkdir -p "$TORRENTS_DIR"
+mkdir -p "$DOWNLOADING_DIR"
+mkdir -p "$COMPLETED_DIR"
+mkdir -p "$WATCH_DIR"
+mkdir -p "$BACKUP_DIR"
 if [ -d "$DELUGE_CONFIG_DIR" ]; then
     # Exists
     echo "Deluge already configured at \"$DELUGE_CONFIG_DIR\"."
@@ -50,6 +60,7 @@ else
     # Does not exist
     echo "Deluge is not configured at \"$DELUGE_CONFIG_DIR\"."
     mkdir -p "$DELUGE_CONFIG_DIR"
+    mkdir -p "$DELUGE_PLUGINS_DIR"
     cp core.conf "$DELUGE_SETTINGS_PATH"
     echo "Created Deluge configuration at $DELUGE_SETTINGS_PATH"
 fi

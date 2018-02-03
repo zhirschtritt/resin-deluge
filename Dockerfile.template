@@ -1,4 +1,4 @@
-FROM resin/torrentpi-node:latest
+FROM resin/%%RESIN_MACHINE_NAME%%:latest
 MAINTAINER Glavin Wiechert <glavin.wiechert@gmail.com>
 
 # Install more dependencies

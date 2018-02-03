@@ -21,8 +21,9 @@ fi
 df -h
 
 # Setup Samba File Sharing
-echo "Setting up Samba Drive"
 npm install -g nodemon
+
+echo "Setting up Samba Drive"
 cp ./smb.conf /etc/samba/smb.conf
 SMBUSER=${SMBUSER:-root}
 SMBPASS=${SMBPASS:-1234}

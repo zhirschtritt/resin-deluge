@@ -2,7 +2,7 @@
 Description = External 1TB HD
 
 [Mount]
-What = /dev/sda1
+What = LABEL=ext41tb
 Where = /data/mount
 Type = ext4
 Options = rw,relatime,data=ordered

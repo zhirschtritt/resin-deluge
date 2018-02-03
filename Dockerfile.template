@@ -15,8 +15,8 @@ RUN apt-get install -y \
 WORKDIR /usr/src/app
 
 # Enable external HD mount
-COPY mnt-storage.mount /etc/systemd/system/
-RUN systemctl enable mnt-storage.mount
+  COPY mnt-storage.mount /etc/systemd/system/
+  RUN systemctl enable mnt-storage.mount
 
 # Copy the application project
 COPY start.sh core.conf ./

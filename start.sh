@@ -19,6 +19,18 @@ else
     echo "Mounting failed!"
 fi
 df -h
+
+# Setup Samba File Sharing
+echo "Setting up Samba Drive"
+npm install -g nodemon
+cp ./smb.conf /etc/samba/smb.conf
+SMBUSER=${SMBUSER:-root}
+SMBPASS=${SMBPASS:-1234}
+echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
+/etc/init.d/samba start
+chmod 777 /data
+npm start
+
 #===== CUSTOMIZE =====
 echo "Setting up Deluge"
 
@@ -49,13 +61,3 @@ echo "Start Deluge daemon"
 deluged --config=$DELUGE_CONFIG_DIR --loglevel=$DELUGE_LOGLEVEL --logfile=$DELUGE_LOGS_PATH
 echo "Start Deluge-Web daemon"
 deluge-web --config=$DELUGE_CONFIG_DIR --loglevel=$DELUGE_LOGLEVEL --port=80
-
-# Setup Samba File Sharing
-npm install -g nodemon
-cp ./smb.conf /etc/samba/smb.conf
-SMBUSER=${SMBUSER:-root}
-SMBPASS=${SMBPASS:-1234}
-echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
-/etc/init.d/samba start
-chmod 777 /data
-npm start

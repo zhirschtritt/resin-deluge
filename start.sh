@@ -24,8 +24,8 @@ df -h
 echo "Setting up Samba Drive"
 npm install -g nodemon
 cp ./smb.conf /etc/samba/smb.conf
-SMBUSER=${SMBUSER:-pi}
-SMBPASS=${SMBPASS:-pi}
+SMBUSER=${SMBUSER:-root}
+SMBPASS=${SMBPASS:-1234}
 echo "Samba user name: $SMBUSER"
 echo "Samba user password: $SMBPASS"
 echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER

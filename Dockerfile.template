@@ -19,7 +19,7 @@ WORKDIR /usr/src/app
   RUN systemctl enable data-mount.mount
 
 # Copy the application project
-COPY start.sh core.conf smb.conf init.js package.json ./
+COPY start.sh core.conf smb.conf ./
 RUN chmod a+x ./start.sh
 
 #npm install

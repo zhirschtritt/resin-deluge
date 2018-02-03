@@ -21,8 +21,6 @@ fi
 df -h
 
 # Setup Samba File Sharing
-npm install -g nodemon
-
 echo "Setting up Samba Drive"
 cp ./smb.conf /etc/samba/smb.conf
 SMBUSER=${SMBUSER:-root}
@@ -32,7 +30,6 @@ echo "Samba user password: $SMBPASS"
 echo -ne "$SMBPASS\n$SMBPASS\n" | smbpasswd -a -s $SMBUSER
 /etc/init.d/samba start
 chmod 777 /data
-npm start
 
 #===== CUSTOMIZE =====
 echo "Setting up Deluge"

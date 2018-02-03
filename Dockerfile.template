@@ -22,10 +22,6 @@ WORKDIR /usr/src/app
 COPY start.sh core.conf smb.conf ./
 RUN chmod a+x ./start.sh
 
-#npm install
-COPY package.json ./
-RUN npm install
-
 # Enable systemd init system in container
 ENV INITSYSTEM on
 

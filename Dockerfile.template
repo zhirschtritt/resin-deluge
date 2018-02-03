@@ -1,4 +1,4 @@
-FROM resin/%%RESIN_MACHINE_NAME%%-node:latest
+FROM resin/torrentpi-node:latest
 MAINTAINER Glavin Wiechert <glavin.wiechert@gmail.com>
 
 # Install more dependencies
@@ -8,17 +8,22 @@ RUN apt-get install -y \
   deluged \
   deluge-web \
   deluge-console \
+  samba samba-common-bin \
   vim
 
 # Defines our working directory in container
 WORKDIR /usr/src/app
+
+# Enable external HD mount
+COPY mnt-storage.mount /etc/systemd/system/
+RUN systemctl enable mnt-storage.mount
 
 # Copy the application project
 COPY start.sh core.conf ./
 RUN chmod a+x ./start.sh
 
 # Enable systemd init system in container
-# ENV INITSYSTEM on
+ENV INITSYSTEM on
 
 # Run on device
 CMD ["/bin/bash", "start.sh"]

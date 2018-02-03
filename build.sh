@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "Generate Dockerfile"
-dockerfile-template --define RESIN_MACHINE_NAME=raspberrypi > Dockerfile
+dockerfile-template --define RESIN_MACHINE_NAME=torrentpi > Dockerfile
 
 echo "Build Docker image"
 docker-compose build

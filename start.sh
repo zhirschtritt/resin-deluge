@@ -4,22 +4,6 @@ set -e
 echo "Starting start.sh..."
 echo "Initializing"
 
-#===== CUSTOMIZE =====
-# Mount network shared drive
-MOUNT_FOLDER=""
-# MOUNT_HOST="/dev/sda1"
-# MOUNT_SOURCE="/$MOUNT_HOST/$MOUNT_FOLDER"
-# MOUNT_DEST="/data/mount"
-# mkdir -p "$MOUNT_DEST"
-# echo "Mounting $MOUNT_SOURCE to $MOUNT_DEST"
-# mount "$MOUNT_SOURCE" "$MOUNT_DEST"
-# if [ $? -eq 0 ]; then
-#     echo "Mounted successfully."
-# else
-#     echo "Mounting failed!"
-# fi
-df -h
-
 # Setup Samba File Sharing
 echo "Setting up Samba Drive"
 cp ./smb.conf /etc/samba/smb.conf
@@ -54,6 +38,7 @@ mkdir -p "$DOWNLOADING_DIR"
 mkdir -p "$COMPLETED_DIR"
 mkdir -p "$WATCH_DIR"
 mkdir -p "$BACKUP_DIR"
+chmod -R 777 /mnt/torrents
 if [ -d "$DELUGE_CONFIG_DIR" ]; then
     # Exists
     echo "Deluge already configured at \"$DELUGE_CONFIG_DIR\"."

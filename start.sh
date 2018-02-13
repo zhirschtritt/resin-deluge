@@ -27,7 +27,7 @@ echo "Setting up Deluge"
 : ${BACKUP_DIR:="/mnt/torrents/backup"}
 
 : ${DELUGE_CONFIG_DIR:="/mnt/deluge/deluge_config"}
-: ${DELUGE_LOGLEVEL:="info"}
+: ${DELUGE_LOGLEVEL:="debug"}
 : ${DELUGE_PLUGINS_DIR:="/mnt/deluge/plugins"}
 DELUGE_SETTINGS_PATH="$DELUGE_CONFIG_DIR/core.conf"
 DELUGE_LOGS_PATH="$DELUGE_CONFIG_DIR/deluged.log"
